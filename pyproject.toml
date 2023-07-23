@@ -5,7 +5,6 @@ description = "Quantitative Portfolio Management Tool"
 authors = ["Anthony Givans, Marcus Stevens, Yash Patel, Matthew Mione, Andrew Lahrheim, Sabian Saliasi"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "quant_strategies"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10"
