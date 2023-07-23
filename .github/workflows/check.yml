@@ -24,4 +24,7 @@ jobs:
       uses: codecov/codecov-action@v3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  
+    - name: First interaction
+      uses: actions/first-interaction@v1.1.1
+    - name: Cache
+      uses: actions/cache@v1.2.1
