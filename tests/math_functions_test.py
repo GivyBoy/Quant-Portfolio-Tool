@@ -3,7 +3,7 @@ Tests for all functions in the math_functions.py file (this is a test file)
 """
 from __future__ import annotations
 
-from ..portfolio_stats.math_functions import MathFunctions
+from portfolio_stats.math_functions import MathFunctions
 
 
 def test_math_functions_returns_correct_value():
