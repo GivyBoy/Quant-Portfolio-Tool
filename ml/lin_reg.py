@@ -13,7 +13,16 @@ class linear_regression:
         self.weights = None
         self.bias = None
 
+<<<<<<< HEAD
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
+=======
+    def fit(self, X: np.ndarray, y: np.ndarray, method = "SGD") -> None:
+        if method == "Closed Form":
+            ones = np.ones((len(X), 1))  # zeros column as 2D array
+            sample_X = np.hstack((ones, X))
+            self.weights = np.linalg.inv(sample_X.T.dot(sample_X)).dot(X.T).dot(y)
+            return
+>>>>>>> 44c46da (Edited the readme)
         num_samples, num_features = X.shape
 
         # init weights and bias
