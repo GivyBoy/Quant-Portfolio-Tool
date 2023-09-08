@@ -12,6 +12,8 @@ The idea behind this project is to create a self-sustaining framework for managi
 
     > Rising Sophomore, studying Math, CS, and Physics. Doing research on Classifiers, particularly Deep Neural Nets, at an REU, a NSF Funded Research Fellowship. Observing Inter/Intra-Class Boundaries in the latent space, with potential applications to evaluate the robustness of a classifier without prior training data or test data. Plan to develop a mock betting simulator, akin to those used for Quantiative Trading interviews, to develop strategy.
 
+3. Delaney Dvorsky 
+    > Sophomore, studying Math, CS, and History. Doing research on using Genetic Algorithms and Machine Learning to better generate inputs in molecular dynamics simulations for solvents, such as partial charges and Lennard-Jones terms.
 
 ## How to Contribute
 
