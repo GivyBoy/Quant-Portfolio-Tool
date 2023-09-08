@@ -95,13 +95,10 @@ class FormulaicAlphaBuilder(IFormulaicAlpha):
         """
         # Get raw alpha signal for each instrument in universe
         for _, (ticker, tmp_data) in enumerate(tqdm(self.db_data.items())):
-            # print(f"Getting formulaic alpha for {ticker}")
-
             # Update raw alpha signal
             self.raw_signal = pd.concat([self.raw_signal, self._alpha_func(tmp_data, ticker)], axis=1).sort_index()
 
-            # Get ex-ante vol (default to 40% annualized vol) -- preferably import from
-            # a pre-computed risk model
+            # Get ex-ante vol (default to 40% annualized vol) -- preferably import from a pre-computed risk model
             default_vol = DEFAULT_VOL / np.sqrt(TRADING_DAYS)
             self.ex_ante_vol = pd.concat(
                 [
@@ -114,14 +111,12 @@ class FormulaicAlphaBuilder(IFormulaicAlpha):
             # Update instrument's data
             self.db_data[ticker] = tmp_data
 
-        # Get binary votes from alpha singal (here this is long only)
+        # Get binary votes from alpha signal (here this is long only)
         self.votes = self.raw_signal.mask(self.raw_signal > 0, 1).mask(self.raw_signal <= 0, 0)
 
         # Get signal conviction -- once you have a multi-strategy system, you can create
-        # a signal for each instrument that generates dynamic conviction levels in each
-        # instrument
-        # alpha_data['signal_strength'] = alpha_data['votes'].apply(lambda x: np.sum(x)
-        # / len(x.dropna()), axis=1)
+        # a signal for each instrument that generates dynamic conviction levels in each instrument
+        # alpha_data['signal_strength'] = alpha_data['votes'].apply(lambda x: np.sum(x) / len(x.dropna()), axis=1)
 
         # Asset level vol targeting (equal risk allocation)
         daily_vol_target = self.vol_target / np.sqrt(TRADING_DAYS)
