@@ -15,6 +15,8 @@ pre-commit = "^3.3.3"
 black = {extras = ["jupyter"], version = "^23.7.0"}
 pandas = "^2.0.3"
 yfinance = "^0.2.26"
+tqdm = "^4.66.1"
+matplotlib = "^3.7.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
@@ -22,7 +24,11 @@ flake8 = "^6.0.0"
 black = "^23.7.0"
 pre-commit = "^3.3.3"
 tox = "^4.6.4"
+ipykernel = "^6.25.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
