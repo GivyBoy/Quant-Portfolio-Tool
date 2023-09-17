@@ -22,7 +22,7 @@ The idea behind this project is to create a self-sustaining framework for managi
     > Rising Junior, studying Math and CS. Presently doing research on Machine Learning methods within Quantitative Finance and working as a Software Engineer in a start-up environment as a Machine Learning and Software Engineer at AI Academy, pushing to provide resources in Math, CS, ML, etc, to students from under-represented backgrounds.
 
 5. Matthew Pisinski
-    > Rising Junior
+    > Rising Junior, in
 
 ## How to Contribute
 
