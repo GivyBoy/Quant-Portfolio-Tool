@@ -6,7 +6,7 @@ The idea behind this project is to create a self-sustaining framework for managi
 
 1. Anthony Givans
 
-    > Rising Junior, studying Math and CS with a minor in Astrophysics. Does Computer Vision Research and is really interested in applying Neural Nets to modern day problems. Currently working on making a Math and Physics LLM that takes a Math (or Physics) question and provides a step-by-step appraoch to solving said question. Also worked at Google (Summer 2023). You may contact me at <anthonygivans876@gmail.com> or <anthonygivans@miami.edu>.
+    > Rising Junior, studying Math and CS with a minor in Astrophysics. Does Computer Vision Research and is really interested in applying Neural Nets to modern day problems. Currently working on making a Math and Physics LLM that takes a Math (or Physics) question and provides a step-by-step approach to solving said question. Also worked at Google (Summer 2023). You may contact me at <anthonygivans876@gmail.com> or <anthonygivans@miami.edu>.
 
 2. Yash Patel
 
@@ -14,6 +14,14 @@ The idea behind this project is to create a self-sustaining framework for managi
 
 3. Delaney Dvorsky 
     > Sophomore, studying Math, CS, and History. Doing research on using Genetic Algorithms and Machine Learning to better generate inputs in molecular dynamics simulations for solvents, such as partial charges and Lennard-Jones terms.
+
+3. Matthew Mione
+
+    > Sophomore, studying Math and CS. Interested in doing pure math research in fields of probability theory and mathematical modeling of real-world scenarios. Fun fact about me: I have a cookie monster onesie, and I like to play piano. You may contact me at <matthewmione@gmail.com> or <mxm194032@miami.edu>. 
+   
+4. Sabian Saliasi
+
+    > Rising Junior, studying Math and CS. Presently doing research on Machine Learning methods within Quantitative Finance and working as a Software Engineer in a start-up environment as a Machine Learning and Software Engineer at AI Academy, pushing to provide resources in Math, CS, ML, etc, to students from under-represented backgrounds.
 
 ## How to Contribute
 
