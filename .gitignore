@@ -2,3 +2,6 @@
 __pycache__
 .tox
 .ipynb_checkpoints/
+.idea
+data/sp_500
+data/russell_3000
