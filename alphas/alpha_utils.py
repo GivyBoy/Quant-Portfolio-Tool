@@ -319,7 +319,9 @@ def sum(x, d):
 
     if isinstance(x, np.ndarray):
         x = pd.Series(x)
-    elif not isinstance(x, pd.Series):
+    elif isinstance(x, pd.DataFrame):
+        return x.rolling(d).mean() 
+    else:
         raise TypeError(type(x))
 
     return x.rolling(d).sum()
@@ -352,13 +354,13 @@ def mean(x, d):
     Returns:
         pd.Series: Rolling standard deviation of the input signal.
     """
+    if isinstance(x, pd.DataFrame):
+        return x.rolling(d).mean()
+    elif isinstance(x, pd.Series) or isinstance(x, np.ndarray):
+        return x.rolling(d).mean()
+    else:
+        raise TypeError("Invalid input type. Expected DataFrame or Series.")
 
-    if isinstance(x, np.ndarray):
-        x = pd.Series(x)
-    elif not isinstance(x, pd.Series):
-        raise TypeError(type(x))
-
-    return x.rolling(d).mean()
 
 
 def std(x, d):
@@ -758,3 +760,24 @@ def ite(x, y: pd.DataFrame, z: pd.DataFrame) -> pd.DataFrame:
         x.fillna(0).astype(int) * y + (~x.astype(bool)).fillna(0).astype(int) * z
     except:
         raise Exception("Data cannot be substituted, boolean may not be same dimensions as dataframes")
+
+def bscore(data: pd.Series, window: int) -> pd.Series:
+    """Bollinger score over the last 'window' days."""
+    rolling_mean = data.rolling(window=window).mean()
+    rolling_std = data.rolling(window=window).std()
+    return (data - rolling_mean) / rolling_std
+
+def returns(data: pd.Series, window: int) -> pd.Series:
+    """Computes returns over a given window."""
+    return data.pct_change(periods=window) + 1
+
+def csscale(data: pd.Series) -> pd.Series:
+    """Cross-sectionally scales a series."""
+    return data / data.abs().sum()
+
+def volatility(data: pd.Series) -> pd.Series:
+    """Computes the rolling 25-day standard deviation."""
+    return data.rolling(window=25).std()
+
+def adv(data: pd.DataFrame, y: int) -> pd.Series:
+    return data['Close'].rolling(window=y).mean()
