@@ -9,9 +9,8 @@ Normal alphas will use the following naming comvention:
 # Third party import
 from __future__ import annotations
 
-import numpy as np
 import pandas as pd
-import scipy
+from alpha_utils import *  # noqa 401, 403
 
 
 def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
@@ -33,26 +32,29 @@ def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     return raw_signal
 
 
-def alpha_042(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
+def alpha_042(mult, ite, gt, mean_a, plus, std_a, csrank, div, obv_a, data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     """
-    minus(
-    csrank(kentau_10(tsrank_10(mvwap_5()),tsrank_10(obv_5()))),
-    csrank(logret_10())
+    mult(
+        ite(
+            gt(mean_2(close),plus(mean_8(close),std_8(close))),
+            neg(const_1),
+            const_1),
+        csrank(div(volume,obv_20()))
+        )
     Args: pd.DataFrame
         Data: requires "Adj Close" and "Volume"
     """
-
-    x = data["Close"].rolling(window=2).mean().dropna()[6:] > (
-        data["Close"].rolling(window=8).mean().dropna() + data["Close"].rolling(window=8).std().dropna()
-    )
-    csrank = (
-        data["Volume"]
-        / np.sign(((data["Adj Close"] / data["Adj Close"].shift(1) - 1) * data["Volume"]).dropna())
-        .rolling(window=20)
-        .sum()
-        .dropna()
-    )
-    raw_signal = [-1 if val else 1 for val in x][13:] * scipy.stats.rankdata(
-        csrank, method="average", nan_policy="omit"
-    )[20:]
-    return raw_signal
+    try:
+        return mult(
+            ite(
+                gt(
+                    mean_a(data, 2, column="Close")[6:],
+                    plus(mean_a(data, 8, column="Close"), std_a(data, 8, column="Close")),
+                ),
+                -1,
+                1,
+            )[13:],
+            csrank(div(data["Volume"], obv_a(data, 20).dropna())),
+        )
+    except:
+        raise Exception("Operations returned invalid data type, or were not possible")
