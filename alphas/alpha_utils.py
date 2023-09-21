@@ -74,6 +74,17 @@ def std_a(data: pd.DataFrame, a: int, column: str = "Adj Close") -> pd.DataFrame
         raise Exception(f"Column {column} is not in {data}")
 
 
+def ewma_a(
+    data: pd.DataFrame,
+    a: int,
+) -> pd.DataFrame:
+    """Exponentially weighted moving average over meaurement period 'a'"""
+    try:
+        return data["Adj Close"].ewm(span=a, adjust=False).mean()
+    except:
+        raise Exception(f"Column 'Adj Close' is not in {data}")
+
+
 def mvwap_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
     """Moving Volume Weighted Average Price; with period 'a'"""
     try:
@@ -85,6 +96,14 @@ def mvwap_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
             "All necessary columns are not present in the data; the function requires 'High', 'Low', 'Close', "
             "and 'Volume)"
         )
+
+
+def delta_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
+    """Change in data vector over last 'a' days"""
+    try:
+        return data.diff(periods=a).dropna()
+    except:
+        raise Exception("Data does not have enough periods to have lookback 'a'")
 
 
 def obv_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
