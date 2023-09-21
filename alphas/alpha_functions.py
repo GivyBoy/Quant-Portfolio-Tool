@@ -12,7 +12,7 @@ from __future__ import annotations
 import pandas as pd
 
 
-def alpha_01(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
+def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     """
     Alpha function
     """
