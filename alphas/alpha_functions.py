@@ -32,7 +32,7 @@ def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     return raw_signal
 
 
-def alpha_042(data: pd.DataFrame, ticker: str) -> pd.DataFrame:  # noqa405
+def alpha_042(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     """
     mult(
         ite(
