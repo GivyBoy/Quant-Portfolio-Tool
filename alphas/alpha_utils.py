@@ -684,10 +684,7 @@ def minus(data_a: pd.DataFrame, data_b: pd.DataFrame) -> pd.DataFrame:
         raise Exception("The summands are not the same datatypes and cannot be subtracted")
 
 
-def mult(
-    data_a: pd.DataFrame,
-    data_b: pd.DataFrame,
-) -> pd.DataFrame:
+def mult(data_a: pd.DataFrame, data_b: pd.DataFrame) -> pd.DataFrame:
     """Difference of two dataframes"""
     try:
         return data_a * data_b
@@ -695,10 +692,7 @@ def mult(
         raise Exception("The elements are not compatible datatypes and cannot be multiplied")
 
 
-def div(
-    data_a: pd.DataFrame,
-    data_b: pd.DataFrame,
-) -> pd.DataFrame:
+def div(data_a: pd.DataFrame, data_b: pd.DataFrame) -> pd.DataFrame:
     """Difference of two dataframes"""
     try:
         return data_a / data_b

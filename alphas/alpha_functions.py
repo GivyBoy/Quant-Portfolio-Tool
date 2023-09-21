@@ -10,6 +10,7 @@ Normal alphas will use the following naming comvention:
 from __future__ import annotations
 
 import pandas as pd
+from alpha_utils import *  # noqa 401,403
 
 
 def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
@@ -31,7 +32,7 @@ def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     return raw_signal
 
 
-def alpha_042(mult, ite, gt, mean_a, plus, std_a, csrank, div, obv_a, data: pd.DataFrame, ticker: str) -> pd.DataFrame:
+def alpha_042(data: pd.DataFrame, ticker: str) -> pd.DataFrame:  # noqa405
     """
     mult(
         ite(
