@@ -94,7 +94,7 @@ class FormulaicAlphaBuilder(IFormulaicAlpha):
         5) Aggregates key alpha model portfolio statistics.
         """
         # Get raw alpha signal for each instrument in universe
-        for _, (ticker, tmp_data) in tqdm(self.db_data.items()):
+        for ticker, tmp_data in tqdm(self.db_data.items()):
             # Update raw alpha signal
             self.raw_signal = pd.concat([self.raw_signal, self._alpha_func(tmp_data, ticker)], axis=1).sort_index()
 
