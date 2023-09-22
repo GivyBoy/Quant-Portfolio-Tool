@@ -10,6 +10,7 @@ Normal alphas will use the following naming comvention:
 from __future__ import annotations
 
 import pandas as pd
+from alpha_utils import *  # noqa 401,403
 
 
 def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
@@ -29,3 +30,19 @@ def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     drop_signal_indices = data["actively_traded"].where(data["actively_traded"] == False).dropna().index
     raw_signal.loc[drop_signal_indices] = 0
     return raw_signal
+
+
+def alpha_043(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
+    """
+    minus(
+        csrank(ewma_5(cor_7(mvwap_8(),obv_8()))),
+        csrank(ewma_5(delta_1(close)))
+        )
+    """
+    try:
+        return minus(
+            rank(correlation(mvwap_a(data, 8), obv_a(data, 8), 7).ewm(span=5).mean()),
+            rank(delta(data["Adj Close"], 1).ewm(span=5).mean()),
+        )
+    except:
+        raise Exception("Operations cannot be computed. Ensure data has neccessary properties")
