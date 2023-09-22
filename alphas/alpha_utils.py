@@ -75,6 +75,23 @@ def rank(x):
     return np.argsort(x) + 1
 
 
+def csrank(x):
+    """
+    Cross-sectionally ranks alpha signal.
+    Parameters:
+        x (pd.Series or np.ndarray): Series of alpha signals.
+    Returns:
+        pd.Series or np.ndarray: Ranked signal.
+    """
+
+    if isinstance(x, np.ndarray):
+        x = pd.Series(x)
+    elif not isinstance(x, (pd.Series, int, float)):
+        raise TypeError(type(x))
+
+    return np.argsort(x) + 1
+
+
 def delay(x, d):
     """
     Delays the input signal by a specified number of periods.
@@ -692,6 +709,14 @@ def neg(data: pd.DataFrame) -> pd.DataFrame:
         raise Exception("The data cannot be made negative")
 
 
+def inv(data: pd.DataFrame) -> pd.DataFrame:
+    """Returns negative of input"""
+    try:
+        return -data
+    except:
+        raise Exception("The data cannot be made negative")
+
+
 def std_a(data: pd.DataFrame, a: int, column: str = "Adj Close") -> pd.DataFrame:
     """Rolling Standard Deviation; with period 'a'"""
     try:
@@ -732,6 +757,14 @@ def tsrank_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
     """Time Series Rank of last element in data; with lookback 'a'"""
     try:
         return stats.rankdata(data[-a:], method="average", nan_policy="omit")[-1]
+    except:
+        raise Exception(f"Data is not long enough for lookback period {a}")
+
+
+def tsmax_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
+    """Time Series Rank of last element in data; with lookback 'a'"""
+    try:
+        return np.max(data[-a:])
     except:
         raise Exception(f"Data is not long enough for lookback period {a}")
 
