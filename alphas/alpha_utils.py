@@ -660,6 +660,22 @@ def industry_beta_neutralize(views: pd.Series, industry: pd.Series, betas: pd.Se
     return w
 
 
+def grssret_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
+    """Gross returns over period 'a'"""
+    try:
+        return data["Adj Close"] / delay(data["Adj Close"], a)
+    except:
+        raise Exception(f"Data is not long enough for lookback {a}")
+
+
+def logret_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
+    """Log returns over period 'a'"""
+    try:
+        return log(grssret_a(data, a))
+    except:
+        raise Exception(f"Data is not long enough for lookback {a}")
+
+
 def mean_a(data: pd.DataFrame, a: int, column: str = "Adj Close") -> pd.DataFrame:
     """Rolling Mean; with period 'a'"""
     try:
@@ -684,6 +700,14 @@ def minus(data_a: pd.DataFrame, data_b: pd.DataFrame) -> pd.DataFrame:
         raise Exception("The summands are not the same datatypes and cannot be subtracted")
 
 
+def div(data_a: pd.DataFrame, data_b: pd.DataFrame) -> pd.DataFrame:
+    """Division of two dataframes"""
+    try:
+        return data_a / data_b
+    except:
+        raise Exception("The data are not the same datatypes and cannot be datatypes")
+
+
 def neg(data: pd.DataFrame) -> pd.DataFrame:
     """Returns negative of input"""
     try:
@@ -695,7 +719,7 @@ def neg(data: pd.DataFrame) -> pd.DataFrame:
 def std_a(data: pd.DataFrame, a: int, column: str = "Adj Close") -> pd.DataFrame:
     """Rolling Standard Deviation; with period 'a'"""
     try:
-        return data["Adj Close"].rolling(window=a).mean().dropna()
+        return data[column].rolling(window=a).std().dropna()
     except:
         raise Exception(f"Column {column} is not in {data}")
 
@@ -758,3 +782,11 @@ def ite(x, y: pd.DataFrame, z: pd.DataFrame) -> pd.DataFrame:
         x.fillna(0).astype(int) * y + (~x.astype(bool)).fillna(0).astype(int) * z
     except:
         raise Exception("Data cannot be substituted, boolean may not be same dimensions as dataframes")
+
+
+def rsi_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
+    """Relative Strength Index"""
+    try:
+        return minus(100, div(100, plus(1, div(mean_a(abs(logret_a(data, 1))), mean_a(abs(neg(logret_a(data))), a)))))
+    except:
+        raise Exception("Operations cannot be computed; check that data is compatible")
