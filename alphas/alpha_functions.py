@@ -10,6 +10,7 @@ Normal alphas will use the following naming comvention:
 from __future__ import annotations
 
 import pandas as pd
+from alpha_utils import *  # noqa 401, 403
 
 
 def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
@@ -29,3 +30,13 @@ def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     drop_signal_indices = data["actively_traded"].where(data["actively_traded"] == False).dropna().index
     raw_signal.loc[drop_signal_indices] = 0
     return raw_signal
+
+
+def alpha_045(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
+    """
+    tsrank_9(neg(csrank(low)))
+    """
+    try:
+        return ts_rank(neg(rank(data["Close"])), 9)
+    except:
+        raise Exception("Operations incompatible with data; check datatype")
