@@ -319,9 +319,7 @@ def sum(x, d):
 
     if isinstance(x, np.ndarray):
         x = pd.Series(x)
-    elif isinstance(x, pd.DataFrame):
-        return x.rolling(d).mean() 
-    else:
+    elif not isinstance(x, pd.Series):
         raise TypeError(type(x))
 
     return x.rolling(d).sum()
@@ -775,9 +773,6 @@ def csscale(data: pd.Series) -> pd.Series:
     """Cross-sectionally scales a series."""
     return data / data.abs().sum()
 
-def volatility(data: pd.Series) -> pd.Series:
-    """Computes the rolling 25-day standard deviation."""
-    return data.rolling(window=25).std()
-
+#replace! 
 def adv(data: pd.DataFrame, y: int) -> pd.Series:
     return data['Close'].rolling(window=y).mean()
