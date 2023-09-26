@@ -772,7 +772,3 @@ def returns(data: pd.Series, window: int) -> pd.Series:
 def csscale(data: pd.Series) -> pd.Series:
     """Cross-sectionally scales a series."""
     return data / data.abs().sum()
-
-#replace! 
-def adv(data: pd.DataFrame, y: int) -> pd.Series:
-    return data['Close'].rolling(window=y).mean()
