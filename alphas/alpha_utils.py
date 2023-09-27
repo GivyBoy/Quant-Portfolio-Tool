@@ -758,3 +758,142 @@ def ite(x, y: pd.DataFrame, z: pd.DataFrame) -> pd.DataFrame:
         x.fillna(0).astype(int) * y + (~x.astype(bool)).fillna(0).astype(int) * z
     except:
         raise Exception("Data cannot be substituted, boolean may not be same dimensions as dataframes")
+
+
+def div(x, y) -> int:
+    """x divided by y"""
+    return x / y
+
+
+def mult(x, y) -> int:
+    """x multiplied by y"""
+    return x * y
+
+
+def add(x, y) -> int:
+    """x added to y"""
+    return x + y
+
+
+def inv(x):
+    """Returns -1 * whatever input is"""
+    return -1 * x
+
+
+def close(data: pd.DataFrame) -> pd.Series:
+    """Returns close data in series"""
+    return pd.Series(data["Close"])
+
+
+def low(data: pd.DataFrame) -> pd.Series:
+    """Returns low data in series"""
+    return pd.Series(data["Low"])
+
+
+def high(data: pd.DataFrame) -> pd.Series:
+    """Returns high data in series"""
+    return pd.Series(data["High"])
+
+
+def volume(data) -> pd.Series:
+    """Returns volume data in series"""
+    return pd.Series(data["Volume"])
+
+
+def returns(data, timeframe, d_type=None) -> pd.Series:
+    """Gets returns data in series form given a time interval"""
+    if d_type is not None:
+        data1 = pd.Series(data[str(d_type)])
+        data2 = data1.shift(timeframe)
+    else:
+        data1 = pd.Series(data)
+        data2 = data1.shift(timeframe)
+
+    return (data1 - data2) / data2
+
+
+def expmn(data, timeframe) -> pd.Series:
+    return data.ewm(span=timeframe).mean()
+
+
+def csscale(vector) -> pd.Series:
+    return pd.Series(vector / np.linalg.norm(vector))
+
+
+def kurt(x, y) -> pd.Series:
+    """Returns kurtosis of x over last y days"""
+    return x.rolling(y).kurt()
+
+
+def cov(x, y, z, rolling=True) -> pd.Series:
+    """Returns covariance of x and y over the last z days"""
+    if rolling == False:
+        return x.cov(y)
+    else:
+        df = pd.DataFrame()
+        df["col_1"] = x
+        df["col_2"] = y
+        return df.rolling(z).cov().unstack()['col_1']['col_2']
+
+
+def ADX(data: pd.DataFrame, period: int) -> pd.DataFrame:
+    """Average Directional Indicator function... Kind of complicated"""
+    df = data.copy()
+    alpha = 1 / period
+    # TR
+    df['H-L'] = df['High'] - df['Low']
+    df['H-C'] = np.abs(df['High'] - df['Close'].shift(1))
+    df['L-C'] = np.abs(df['Low'] - df['Close'].shift(1))
+    df['TR'] = df[['H-L', 'H-C', 'L-C']].max(axis=1)
+    del df['H-L'], df['H-C'], df['L-C']
+    # ATR
+    df['ATR'] = df['TR'].ewm(alpha=alpha, adjust=False).mean()
+    # +-DX
+    df['H-pH'] = df['High'] - df['High'].shift(1)
+    df['pL-L'] = df['Low'].shift(1) - df['Low']
+    df['+DX'] = np.where(
+        (df['H-pH'] > df['pL-L']) & (df['H-pH'] > 0),
+        df['H-pH'],
+        0.0
+    )
+    df['-DX'] = np.where(
+        (df['H-pH'] < df['pL-L']) & (df['pL-L'] > 0),
+        df['pL-L'],
+        0.0
+    )
+    del df['H-pH'], df['pL-L']
+
+    # +- DMI
+    df['S+DM'] = df['+DX'].ewm(alpha=alpha, adjust=False).mean()
+    df['S-DM'] = df['-DX'].ewm(alpha=alpha, adjust=False).mean()
+    df['+DMI'] = (df['S+DM'] / df['ATR']) * 100
+    df['-DMI'] = (df['S-DM'] / df['ATR']) * 100
+    del df['S+DM'], df['S-DM']
+
+    # ADX
+    df['DX'] = (np.abs(df['+DMI'] - df['-DMI']) / (df['+DMI'] + df['-DMI'])) * 100
+    df['ADX'] = df['DX'].ewm(alpha=alpha, adjust=False).mean()
+    del df['DX'], df['ATR'], df['TR'], df['-DX'], df['+DX'], df['+DMI'], df['-DMI']
+
+    return df["ADX"]
+
+
+def mvwap(data, timeframe, d_type="Close"):
+    """Returns the ean weighted moving average"""
+    return data.rolling(timeframe).mean()[d_type]
+
+
+def tsmin(data, timeframe) -> pd.Series:
+    """Returns the minimum datapoint over a timeframe"""
+    return data.rolling(timeframe).min()
+
+
+def cor(x, y, z, rolling=True) -> pd.Series:
+    """Returns the correlation between x and y over the last z days"""
+    if rolling == False:
+        return x.corr(y)
+    else:
+        df = pd.DataFrame()
+        df["col_1"] = x
+        df["col_2"] = y
+        return df.rolling(z).corr().unstack()['col_1']['col_2']
