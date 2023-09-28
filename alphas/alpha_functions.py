@@ -10,7 +10,7 @@ Normal alphas will use the following naming comvention:
 from __future__ import annotations
 
 import pandas as pd
-from alpha_utils import *  # noqa 401,403
+from alpha_utils import *
 
 
 def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
