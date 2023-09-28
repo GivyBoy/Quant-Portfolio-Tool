@@ -10,6 +10,7 @@ Normal alphas will use the following naming comvention:
 from __future__ import annotations
 
 import pandas as pd
+from alpha_utils import *
 
 
 def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
@@ -29,3 +30,31 @@ def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     drop_signal_indices = data["actively_traded"].where(data["actively_traded"] == False).dropna().index
     raw_signal.loc[drop_signal_indices] = 0
     return raw_signal
+
+
+def alpha_042(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
+    """
+    mult(
+        ite(
+            gt(mean_2(close),plus(mean_8(close),std_8(close))),
+            neg(const_1),
+            const_1),
+        csrank(div(volume,obv_20()))
+        )
+    Args: pd.DataFrame
+        Data: requires "Adj Close" and "Volume"
+    """
+    try:
+        return mult(
+            ite(
+                gt(
+                    mean_a(data, 2, column="Close")[6:],
+                    plus(mean_a(data, 8, column="Close"), std_a(data, 8, column="Close")),
+                ),
+                -1,
+                1,
+            )[13:],
+            csrank(div(data["Volume"], obv_a(data, 20).dropna())),
+        )
+    except:
+        raise Exception("Operations returned invalid data type, or were not possible")

@@ -684,7 +684,31 @@ def minus(data_a: pd.DataFrame, data_b: pd.DataFrame) -> pd.DataFrame:
         raise Exception("The summands are not the same datatypes and cannot be subtracted")
 
 
+def mult(data_a: pd.DataFrame, data_b: pd.DataFrame) -> pd.DataFrame:
+    """Difference of two dataframes"""
+    try:
+        return data_a * data_b
+    except:
+        raise Exception("The elements are not compatible datatypes and cannot be multiplied")
+
+
+def div(data_a: pd.DataFrame, data_b: pd.DataFrame) -> pd.DataFrame:
+    """Difference of two dataframes"""
+    try:
+        return data_a / data_b
+    except:
+        raise Exception("The elements are not compatible datatypes and cannot be divided")
+
+
 def neg(data: pd.DataFrame) -> pd.DataFrame:
+    """Returns negative of input"""
+    try:
+        return -data
+    except:
+        raise Exception("The data cannot be made negative")
+
+
+def inv(data: pd.DataFrame) -> pd.DataFrame:
     """Returns negative of input"""
     try:
         return -data
@@ -734,6 +758,22 @@ def tsrank_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
         return stats.rankdata(data[-a:], method="average", nan_policy="omit")[-1]
     except:
         raise Exception(f"Data is not long enough for lookback period {a}")
+
+
+def tsmax_a(data: pd.DataFrame, a: int) -> pd.DataFrame:
+    """Time Series maximum value; with lookback 'a'"""
+    try:
+        return np.max(data[-a:])
+    except:
+        raise Exception(f"Data is not long enough for lookback period {a}")
+
+
+def csrank(data: pd.DataFrame, x: str) -> pd.DataFrame:
+    """Cross sectional rank of column 'x' in data"""
+    try:
+        return scipy.stats.rankdata(x, method="average", nan_policy="omit")
+    except:
+        raise Exception(f"Data does not have column {x}")
 
 
 def kentau_a(data_a: pd.DataFrame, data_b: pd.DataFrame, a: int) -> pd.DataFrame:
