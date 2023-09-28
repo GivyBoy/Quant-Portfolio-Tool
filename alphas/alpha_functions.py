@@ -41,7 +41,7 @@ def alpha_006(data: pd.DataFrame) -> pd.Series:
     tsrank_bscore_delta = ts_rank(delta(bscore(data['Adj Close'], 13), 36), 38)
 
     return neg_bscore_delta/tsrank_bscore_delta
-
+    
 def alpha_007(data: pd.DataFrame) -> pd.DataFrame:
     """
     inv{mult(rank[tsrank{close,10}], rank[div{close,open}])}
@@ -65,7 +65,7 @@ def alpha_009(data: pd.DataFrame) -> pd.DataFrame:
     inv(sum{mean[cov(adv(67),volatility,32),14],56})
     """
     cov = covariance(ta.adx(data['High'], data['Low'], data['Adj Close'], length=67)['ADX_67'], std_a(data,25), 32)
-    
+
     return neg(sum(mean(cov, 14), 56))
 
 def alpha_010(data: pd.DataFrame) -> pd.DataFrame:
