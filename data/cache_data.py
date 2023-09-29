@@ -10,7 +10,7 @@ import data_utils
 CWD = os.path.dirname(os.path.abspath(__file__))
 
 # Define constants
-R3K_TICKER_PATH = os.path.join(CWD, r"russell_3000/russell_3000_returns.pickle")
+R3K_TICKER_PATH = os.path.join(CWD, r"r3k_tickers.txt")
 R3K_CACHE_PATH = os.path.join(CWD, r"russell_3000/russell_3000_cache.pickle")
 SP_500_CACHE_PATH = os.path.join(CWD, r"sp_500/sp_500_cache.pickle")
 
@@ -24,7 +24,7 @@ def main():
     """
 
     # Get user-specified universe
-    universe = "sp_500"
+    universe = "russell_3000"
 
     assert universe in UNIVERSE_LIST, universe
 
@@ -33,7 +33,8 @@ def main():
 
     if universe == "russell_3000":
         # Get list of stock tickers
-        ticker_list = data_utils.load_cache(path=R3K_TICKER_PATH).columns
+        f = open(R3K_TICKER_PATH, "r")
+        ticker_list = f.read().splitlines()
 
         # Get OHLC + returns data
         ohlc_data = data_utils.get_ohlc_data(ticker_list)
