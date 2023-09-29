@@ -14,7 +14,7 @@ import pandas as pd
 from scipy import stats
 
 
-def alpha_01(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
+def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     """
     Alpha function
     """
