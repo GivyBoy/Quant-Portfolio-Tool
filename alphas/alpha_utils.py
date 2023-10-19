@@ -758,3 +758,23 @@ def ite(x, y: pd.DataFrame, z: pd.DataFrame) -> pd.DataFrame:
         x.fillna(0).astype(int) * y + (~x.astype(bool)).fillna(0).astype(int) * z
     except:
         raise Exception("Data cannot be substituted, boolean may not be same dimensions as dataframes")
+
+
+# start of my functions
+
+
+def obv(data: pd.DataFrame, a: int) -> pd.DataFrame:
+    return np.sum(np.sign(data["Close"] / (data["Close"][-(a + 1)]) * data["Volume"]))
+
+
+def atr_a(data: pd.DataFrame) -> pd.DataFrame:
+    return np.mean(max(data["High"] - data["Low"]), abs((data["High"] - delay(data["Close"]))))
+
+
+def adx(data: pd.DataFrame, y: int) -> pd.DataFrame:
+    """Average directional index"""
+
+    var_1 = 100 * (mean(delta(data["High"])) / atr_a())
+    var_2 = 100 * (mean((neg(delta(data["Low"]))) / atr_a()))
+
+    return np.mean(100 * ((abs(var_1 - var_2)) / abs(var_1 + var_2)))
