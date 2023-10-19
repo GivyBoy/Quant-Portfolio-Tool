@@ -29,3 +29,40 @@ def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
     drop_signal_indices = data["actively_traded"].where(data["actively_traded"] == False).dropna().index
     raw_signal.loc[drop_signal_indices] = 0
     return raw_signal
+
+# ALPHAS
+
+def alpha_021(data): 
+    try:
+        return inv(expmn(div(kurt(returns(data, 1, "Close"), 10), std(low(data), 10)), 5))
+    except:
+        print("alpha_021 has an error")
+
+def alpha_022(data): # HAS ADV
+    return inv(mean(cov(ADX(data, 7), std(data["Close"], 25), 7), 7))
+
+def alpha_023(data): # HAS ADV
+    return inv(minus(rank(minus(mvwap(data, 5), tsmin(mvwap(data, 5), 10))), rank(cor(mvwap(data,5), ADX(data,8), 10))))
+
+def alpha_024(data):
+    return inv(mult(cov(high(data), returns(data, 30, "Close"), 41), csscale(volume(data))))
+
+def alpha_025(data): # HAS ADV
+    return inv(sum_(mean(cov(ADX(data,67), ADX(data,90), 32), 14), 56))
+
+
+def alpha_026(data): # BECOMING DOGSHIT
+    return cov(inv(minus(abs_(mvwap(data,90)),rank(low(data)))), inv(np.array(delta(rank(close(data)), 51))), 55) 
+
+def alpha_027(data):
+    return delta(div(low(data), close(data)), 26)
+
+def alpha_028(data):
+    return expmn(inv(mult(cov(high(data),returns(data, 3, "Close"), 5), std(std(data["Close"], 25), 5))),5)
+
+def alpha_029(data):
+    return alpha_028(data) # GET FUCKING PRANKED
+
+def alpha_030(data):
+    return minus(np.array(rank(returns(data, 10, "Close"))), np.array(rank(std(high(data), 10)))) 
+# End
