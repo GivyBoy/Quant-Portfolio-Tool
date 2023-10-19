@@ -65,3 +65,4 @@ def alpha_029(data):
 
 def alpha_030(data):
     return minus(np.array(rank(returns(data, 10, "Close"))), np.array(rank(std(high(data), 10)))) 
+# End
