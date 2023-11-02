@@ -93,17 +93,17 @@ def alpha_004(data: pd.DataFrame) -> pd.Series:
     pass
 
 
-def alpha_005(data: pd.DataFrame) -> pd.Series:
-    """
-    tsrank − inv{expmn[bscore(25), 40], 70}
-    """
-    neg_expmn_bscore = neg(expmn[bscore(25), 40], 70)
-    return tsrank_a(neg_expmn_bscore)
+# def alpha_005(data: pd.DataFrame) -> pd.Series:
+#     """
+#     tsrank − inv{expmn[bscore(25), 40], 70}
+#     """
+#     neg_expmn_bscore = neg(expmn[bscore(25), 40], 70)
+#     return tsrank_a(neg_expmn_bscore)
 
-    # ask anthony if expmn is ewma
-    # have problem finding bscore in documentation
+#     # ask anthony if expmn is ewma
+#     # have problem finding bscore in documentation
 
-    pass
+#     pass
 
 
 # data = get_stock_data("^GSPC")
