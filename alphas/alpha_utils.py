@@ -760,9 +760,6 @@ def ite(x, y: pd.DataFrame, z: pd.DataFrame) -> pd.DataFrame:
         raise Exception("Data cannot be substituted, boolean may not be same dimensions as dataframes")
 
 
-# start of my functions
-
-
 def obv(data: pd.DataFrame, a: int) -> pd.DataFrame:
     return np.sum(np.sign(data["Close"] / (data["Close"][-(a + 1)]) * data["Volume"]))
 
@@ -778,3 +775,11 @@ def adx(data: pd.DataFrame, y: int) -> pd.DataFrame:
     var_2 = 100 * (mean((neg(delta(data["Low"]))) / atr_a()))
 
     return np.mean(100 * ((abs(var_1 - var_2)) / abs(var_1 + var_2)))
+
+
+def ewma_a(data: pd.DataFrame, a: int):
+    return data.rolling(data["x"]).ewm(a)
+
+
+def grssret_a(data: pd.DataFrame, a: int):
+    return (data["Close"]) / (delay(data["Close"], a))
