@@ -42,15 +42,7 @@ def alpha_001(data: pd.DataFrame) -> pd.Series:
     """
 
     var_x = neg([ts_rank(obv_a(15)) * tsmax_a(data["Volume"], 12)])
-
     return ewma_a(var_x, 10)
-
-    # volume = data["Volume"]
-    # yash added tsmax, inv, mult; used * instead of mult (talk to anthony)
-    # added obv_a but need to ask anthony because didn't realize there already was one
-    # ask about ewma / expmn
-
-    pass
 
 
 def alpha_002(data: pd.DataFrame) -> pd.Series:
@@ -59,22 +51,7 @@ def alpha_002(data: pd.DataFrame) -> pd.Series:
     """
     neg_covariance = neg(covariance[data("High"), data("Low"), 12])
     neg_std_close = std(std(data("Close"), 25), 20)
-
     return neg_covariance * neg_std_close
-
-    # ask anthony how to do the VOLATILITY - rolling 25 day std - std(data("Close")) (important for alpha 4)
-
-
-def alpha_003(data: pd.DataFrame) -> pd.Series:
-    """
-    abs − inv{csscale[cov(bscore(97), adv(63), 86)]}
-    """
-    neg_cs_scale = neg(csscale[covariance(bscore(97), adx(63), 86)])
-    return abs(neg_cs_scale)
-
-    # issue finding cs scale in documentation
-    # issue finding bscore in documentation
-    # ask anthony about the const_100 with adx + confirm it is right util
 
 
 def alpha_004(data: pd.DataFrame) -> pd.Series:
@@ -83,30 +60,5 @@ def alpha_004(data: pd.DataFrame) -> pd.Series:
     """
 
     std_mvwap_a = std(mvwap_a(49, 35))
-    cor_vol_returns = correlation(std(data("Close"), 25), returns(56), 24)
-
+    cor_vol_returns = correlation(std(data("Close"), 25), grssret_a(56), 24)
     return abs(neg(std_mvwap_a * cor_vol_returns))
-
-    # figure out how to do returns/ which returns in documentation
-    # check on volatility
-
-    pass
-
-
-# def alpha_005(data: pd.DataFrame) -> pd.Series:
-#     """
-#     tsrank − inv{expmn[bscore(25), 40], 70}
-#     """
-#     neg_expmn_bscore = neg(expmn[bscore(25), 40], 70)
-#     return tsrank_a(neg_expmn_bscore)
-
-#     # ask anthony if expmn is ewma
-#     # have problem finding bscore in documentation
-
-#     pass
-
-
-# data = get_stock_data("^GSPC")
-# x = alpha_001(data)
-
-# print(data["Volatility"])
