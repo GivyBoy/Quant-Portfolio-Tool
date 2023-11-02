@@ -44,7 +44,7 @@ def alpha_006(data: pd.DataFrame) -> pd.Series:
     
 def alpha_007(data: pd.DataFrame) -> pd.DataFrame:
     """
-    inv{mult(rank[tsrank{close,10}], rank[div{close,open}])}
+    inv{mult(rank[tsrank{close,10}], rank[div(close,open)])}
     """
     rank_tsrank_close = ts_rank(data['Adj Close'], 10).rank()
     rank_close_open_div = (data['Adj Close'] / data['Open']).rank()
