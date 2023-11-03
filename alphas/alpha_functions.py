@@ -11,16 +11,7 @@ from __future__ import annotations
 
 import pandas as pd
 import pandas_ta as ta
-from alpha_utils import bscore
-from alpha_utils import covariance
-from alpha_utils import csscale
-from alpha_utils import delta
-from alpha_utils import mean
-from alpha_utils import neg
-from alpha_utils import returns
-from alpha_utils import std_a
-from alpha_utils import ts_min
-from alpha_utils import ts_rank
+from alpha_utils import *
 
 
 def alpha_001(data: pd.DataFrame, ticker: str) -> pd.DataFrame:
