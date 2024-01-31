@@ -18,11 +18,15 @@ The idea behind this project is to create a self-sustaining framework for managi
 
 3. Matthew Mione
 
-    > Sophomore, studying Math and CS. Interested in doing pure math research in fields of probability theory and mathematical modeling of real-world scenarios. Fun fact about me: I have a cookie monster onesie, and I like to play piano. You may contact me at <matthewmione@gmail.com> or <mxm194032@miami.edu>. 
-   
+    > Sophomore, studying Math and CS. Interested in doing pure math research in fields of probability theory and mathematical modeling of real-world scenarios. Fun fact about me: I have a cookie monster onesie, and I like to play piano. You may contact me at <matthewmione@gmail.com> or <mxm194032@miami.edu>.
+
 4. Sabian Saliasi
 
     > Rising Junior, studying Math and CS. Presently doing research on Machine Learning methods within Quantitative Finance and working as a Software Engineer in a start-up environment as a Machine Learning and Software Engineer at AI Academy, pushing to provide resources in Math, CS, ML, etc, to students from under-represented backgrounds.
+
+5. Matthew Pisinski
+
+    > Rising Junior, studying Biochemistry and Molecular Biology. Presently picking up a math minor with hopes of double majoring and conducting Nueroscience research at the University of Miami Miller School of Medicine. Currently planning to attend math/ML graduate school program or medical school, and currently on the hunt for a summer internship. Avid learner!
 
 ## How to Contribute
 
