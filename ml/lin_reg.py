@@ -4,11 +4,12 @@ import numpy as np
 
 
 class linear_regression:
-    def __init__(self, learning_rate=1e-3, iters=10_000) -> None:
+    def __init__(self, learning_rate=1e-3, iters=10_000, batch_size=32) -> None:
         assert learning_rate > 0, "Learning rate must be greater than 0"
         assert iters > 0, "Number of iterations must be greater than 0"
         self.learning_rate = learning_rate
         self.iters = iters
+        self.batch_size = batch_size
         self.weights = None
         self.bias = None
 
