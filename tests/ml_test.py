@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import math
-
 import time
 
 from sklearn import datasets
@@ -31,6 +30,7 @@ def test_lin_reg_returns_reasonable_loss() -> None:
 
     assert math.isclose(lin_reg_mse, regressor_mse, rel_tol=0.02)
 
+
 def test_lin_reg_runtime() -> None:
     X, y = datasets.make_regression(n_samples=100, n_features=3, noise=20, random_state=17)
     sgd_start_time = time.time()
@@ -40,10 +40,8 @@ def test_lin_reg_runtime() -> None:
     sgd_end_time = time.time()
     sgd_time = sgd_end_time - sgd_start_time
     closed_start_time = time.time()
-    regressor = linear_regression(method = "Closed Form")
-    regressor.fit(X,y)
+    regressor = linear_regression(method="Closed Form")
+    regressor.fit(X, y)
     closed_end_time = time.time()
     closed_time = closed_end_time - closed_start_time
     print(f"SGD Time: {sgd_time} \t Closed Form Time: {closed_time} \t")
-
-test_lin_reg_runtime()
