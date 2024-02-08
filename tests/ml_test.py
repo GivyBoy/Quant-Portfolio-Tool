@@ -31,17 +31,17 @@ def test_lin_reg_returns_reasonable_loss() -> None:
     assert math.isclose(lin_reg_mse, regressor_mse, rel_tol=0.02)
 
 
-def test_lin_reg_runtime() -> None:
-    X, y = datasets.make_regression(n_samples=100, n_features=3, noise=20, random_state=17)
+def test_lin_reg_runtime(features) -> None:
+    X, y = datasets.make_regression(n_samples=100, n_features=features, noise=20, random_state=17)
     sgd_start_time = time.time()
     regressor = linear_regression(learning_rate=1e-3, iters=10_000)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=17)
     regressor.fit(X_train, y_train)
     sgd_end_time = time.time()
     sgd_time = sgd_end_time - sgd_start_time
-    closed_start_time = time.time()
-    regressor = linear_regression(method="Closed Form")
+    closed_form_start_time = time.time()
+    regressor = linear_regression()
     regressor.fit(X, y)
-    closed_end_time = time.time()
-    closed_time = closed_end_time - closed_start_time
-    print(f"SGD Time: {sgd_time} \t Closed Form Time: {closed_time} \t")
+    closed_form_end_time = time.time()
+    closed_form_time = closed_form_end_time - closed_form_start_time
+    assert (sgd_time - closed_form_time) > 0

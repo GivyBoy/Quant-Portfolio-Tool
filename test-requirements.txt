@@ -2,3 +2,4 @@ numpy
 pytest
 coverage
 scikit-learn
+time

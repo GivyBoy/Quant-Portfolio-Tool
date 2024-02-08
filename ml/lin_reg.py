@@ -15,10 +15,11 @@ class linear_regression:
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> None:
 
-        if len(X[0]) <= 185:
+        num_samples, num_features = X.shape
+        if num_samples <= 185:
+            self.bias = 0
             self.weights = np.linalg.inv(X.T.dot(X)).dot(X.T).dot(y)
             return
-        num_samples, num_features = X.shape
 
         # init weights and bias
         self.weights = np.zeros(num_features)
