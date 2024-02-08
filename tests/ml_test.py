@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import random
 import time
 
 from sklearn import datasets
@@ -31,7 +32,8 @@ def test_lin_reg_returns_reasonable_loss() -> None:
     assert math.isclose(lin_reg_mse, regressor_mse, rel_tol=0.02)
 
 
-def test_lin_reg_runtime(features) -> None:
+def test_lin_reg_runtime() -> None:
+    features = random.choice(range(1, 185))
     X, y = datasets.make_regression(n_samples=100, n_features=features, noise=20, random_state=17)
     sgd_start_time = time.time()
     regressor = linear_regression(learning_rate=1e-3, iters=10_000)
