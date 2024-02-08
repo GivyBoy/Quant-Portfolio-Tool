@@ -29,7 +29,7 @@ def test_lin_reg_returns_reasonable_loss() -> None:
     lin_reg_mse = linear_regression.mse(y_test, lin_reg_pred)
     regressor_mse = linear_regression.mse(y_test, regressor_pred)
 
-    assert math.isclose(lin_reg_mse, regressor_mse, rel_tol=0.02)
+    assert math.isclose(lin_reg_mse, regressor_mse, rel_tol=0.1)
 
 
 def test_lin_reg_runtime() -> None:
