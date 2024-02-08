@@ -46,4 +46,5 @@ def test_lin_reg_runtime() -> None:
     regressor.fit(X, y)
     closed_form_end_time = time.time()
     closed_form_time = closed_form_end_time - closed_form_start_time
+    print(sgd_time - closed_form_time)
     assert (sgd_time - closed_form_time) > 0
