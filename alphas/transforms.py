@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
-from alpha_builder_utils import quantiles
+from alpha_utils import quantiles
 
 
 class Compose:
