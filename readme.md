@@ -24,6 +24,9 @@ The idea behind this project is to create a self-sustaining framework for managi
 
     > Rising Junior, studying Math and CS. Presently doing research on Machine Learning methods within Quantitative Finance and working as a Software Engineer in a start-up environment as a Machine Learning and Software Engineer at AI Academy, pushing to provide resources in Math, CS, ML, etc, to students from under-represented backgrounds.
 
+6. Hannah Beatty
+    > Freshman studying Math and Computer Engineering.
+
 ## How to Contribute
 
 Note: these instructions assume a working knowledge of both `git` and `github` and that you also have `git` already installed on your machine
